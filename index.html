@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Freefall Simulation</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h1>Freefall Simulation</h1>
+
+    <div id="controls" class="panel light">
+        <button id="restart">Restart</button>
+        <button id="pause">▶ Play</button>
+        <label>
+            <input type="checkbox" id="atmosphereToggle" checked />
+            Use Atmosphere
+        </label>
+    </div>
+
+    <div id="forces" class="panel dark">
+        <p>Gravity: <span id="force-gravity">0</span> N</p>
+        <p>Drag: <span id="force-drag">0</span> N</p>
+        <p>Buoyancy: <span id="force-buoyancy">0</span> N</p>
+        <p>Normal: <span id="force-normal">0</span> N</p>
+        <p>Net Force: <span id="force-net">0</span> N</p>
+    </div>
+
+    <div id="fallingObject" class="panel dark">
+        <button id="nextObject">Next Object ▷</button>
+        <p>Name: <span id="object-name">--</span></p>
+        <p>Mass: <span id="object-mass">--</span> kg</p>
+        <p>Drag Coefficient: <span id="object-dragCoefficient">--</span></p>
+        <p>Frontal Area: <span id="object-frontalArea">--</span> m²</p>
+        <p>Volume: <span id="object-volume">--</span> m³</p>
+    </div>
+
+    <div id="motion" class="panel dark">
+        <p>Acceleration: <span id="object-acceleration">--</span> m/s²</p>
+        <p>Velocity: <span id="object-velocity">--</span> m/s</p>
+        <p>Position: <span id="object-position">--</span> m</p>
+        <p>Freefall Time: <span id="object-time">--</span> s</p>
+    </div>
+
+    <div id="environment" class="panel dark">
+        <button id="nextEnvironment">Next Environment ▷</button>
+        <p>Name: <span id="environment-name">--</span></p>
+        <p>Gravity: <span id="environment-gravity">--</span> m/s²</p>
+        <p>Air Density: <span id="environment-airDensity">--</span> kg/m³</p>
+    </div>
+
+    <script src="https://pixijs.download/release/pixi.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

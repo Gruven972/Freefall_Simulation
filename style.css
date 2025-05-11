@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    margin: 0;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.panel {
+    position: absolute;
+    background: rgba(80, 80, 80, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    line-height: 0.7;
+    color: white;
+}
+
+.panel.light {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+    /* Positioning */
+#controls { top: 50px; left: 200px; }
+#forces { top: 350px; left: 450px; }
+#motion { top: 350px; left: 50px; }
+#fallingObject { top: 600px; left: 50px; }
+#environment { top: 600px; left: 350px; }
