@@ -103,9 +103,9 @@ function setupDisplays() {
     const pixelRange = objMaxPixelY - groundPixelY;
 
     const desiredObjSpriteSize = 16;
-    const boxSprite = await PIXI.Assets.load('sprites/Box.png');
-    const ballSprite = await PIXI.Assets.load('sprites/Ball.png');
-    const panelSprite = await PIXI.Assets.load('sprites/Panel.png');
+    const boxSprite = await PIXI.Assets.load('Sprites/Box.png');
+    const ballSprite = await PIXI.Assets.load('Sprites/Ball.png');
+    const panelSprite = await PIXI.Assets.load('Sprites/Panel.png');
     let objectSprites = [
         boxSprite,
         ballSprite,
@@ -117,9 +117,9 @@ function setupDisplays() {
     objectSprite.y = groundPixelY;
     objectSprite.scale.set(desiredObjSpriteSize/ objectSprite.texture.width, desiredObjSpriteSize/ objectSprite.texture.height);
 
-    const earthSprite = await PIXI.Assets.load('sprites/Earth_bg.png');
-    const moonSprite = await PIXI.Assets.load('sprites/Moon_bg.png');
-    const jupiterSprite = await PIXI.Assets.load('sprites/Jupiter_bg.png');
+    const earthSprite = await PIXI.Assets.load('Sprites/Earth_bg.png');
+    const moonSprite = await PIXI.Assets.load('Sprites/Moon_bg.png');
+    const jupiterSprite = await PIXI.Assets.load('Sprites/Jupiter_bg.png');
     let environmentSprites = [
         earthSprite,
         moonSprite,

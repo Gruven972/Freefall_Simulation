@@ -26,6 +26,6 @@ h1 {
     /* Positioning */
 #controls { top: 50px; left: 200px; }
 #forces { top: 350px; left: 450px; }
-#motion { top: 350px; left: 50px; }
-#fallingObject { top: 600px; left: 50px; }
-#environment { top: 600px; left: 350px; }
+#motion { top: 250px; left: 50px; }
+#fallingObject { top: 120px; left: 700px; }
+#environment { top: 350px; left: 700px; }
