@@ -330,7 +330,7 @@ function setupDisplays() {
         objectDisplays.acceleration.textContent = freefallObject.acceleration.toFixed(2);
         objectDisplays.velocity.textContent = freefallObject.velocity.toFixed(2);
         objectDisplays.position.textContent = freefallObject.position.toFixed(2);
-        objectDisplays.time.textContent = freefallObject.time.toFixed(2);
+        objectDisplays.time.textContent = freefallObject.time.toFixed(3);
     }
 
 })();
