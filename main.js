@@ -53,6 +53,7 @@ function setupDisplays() {
         Dom.configureButton("restart", handleReset);
         const pauseBtn = Dom.configureButton("pause", handlePauseToggle);
         Dom.configureButton("atmosphereToggle", handleAtmosphereToggle);
+        Dom.configureButton("updateToggle", handleUpdateToggle);
         Dom.configureButton("nextObject", handleNextObject);
         Dom.configureButton("nextEnvironment", handleNextEnvironment);
     
@@ -76,6 +77,11 @@ function setupDisplays() {
         simulationState.useDrag = simulationState.useAtmosphere;
         simulationState.useBuoyancy = simulationState.useAtmosphere;
         console.log(simulationState.useAtmosphere ? "Atmosphere on." : "Atmosphere off.");
+    }
+
+    function handleUpdateToggle(){
+        simulationState.useRK4Update = !simulationState.useRK4Update;
+        console.log(simulationState.useRK4Update ? "RK4Update on" : "Simple Update on");
     }
 
     function handleNextObject(){
@@ -170,6 +176,7 @@ function setupDisplays() {
         simulationTime: 0,
         runTime: 0,
         useAtmosphere: true,
+        useRK4Update: false,
         useDrag: true,
         useBuoyancy: true
     }
@@ -244,7 +251,13 @@ function setupDisplays() {
             simulationState.simulationTime += deltaTime;
 
             // Update object
-            freefallObject.Update(environment, deltaTime, simulationState.useDrag, simulationState.useBuoyancy);
+            if(simulationState.useRK4Update){
+                freefallObject.UpdateRK4(environment, deltaTime, simulationState.useDrag, simulationState.useBuoyancy);
+            }
+            else{
+                freefallObject.Update(environment, deltaTime, simulationState.useDrag, simulationState.useBuoyancy);
+            }
+            
             SetFreefallObjectPos();
 
             // Update force arrows

@@ -66,8 +66,8 @@ export class FreeFallObject {
         this.acceleration = this.forceTotal / this.mass;
     }
 
-    Update(environment, deltaTime, useDrag = true, useBuoyancy = true) {
-        this.CalculateAcceleration(environment, useDrag, useBuoyancy);
+    Update(environment, deltaTime, useDrag = true, useBuoyancy = true) { // Basic riemman sums (right)
+        this.CalculateAcceleration(environment, useDrag, useBuoyancy); 
         this.velocity += this.acceleration * deltaTime;
         this.position += this.velocity * deltaTime;
         this.position = Math.max(this.position, 0);
@@ -75,6 +75,64 @@ export class FreeFallObject {
         else{
             this.velocity = 0;
         }
+    }
+
+    UpdateRK4(environment, deltaTime, useDrag = true, useBuoyancy = true) { //Runge-Kutta 4th Order More accurate by using last frame, mid frame and end frame and averaging them
+        const state = {
+            position: this.position,
+            velocity: this.velocity
+        };
+    
+        const state1 = this.CalculateState(state, environment, useDrag, useBuoyancy); // last frame state
+    
+        const state2 = this.CalculateState({  // Mid frame state(1) built using last frame state
+            position: state.position + state1.dx * deltaTime * 0.5,
+            velocity: state.velocity + state1.dv * deltaTime * 0.5
+        }, environment, useDrag, useBuoyancy);
+    
+        const state3 = this.CalculateState({ // Mid frame(2) state built using mid frame state
+            position: state.position + state2.dx * deltaTime * 0.5,
+            velocity: state.velocity + state2.dv * deltaTime * 0.5
+        }, environment, useDrag, useBuoyancy);
+    
+        const state4 = this.CalculateState({ // End Frame state
+            position: state.position + state3.dx * deltaTime,
+            velocity: state.velocity + state3.dv * deltaTime
+        }, environment, useDrag, useBuoyancy);
+    
+        const dx = (state1.dx + 2 * state2.dx + 2 * state3.dx + state4.dx) / 6; // Average Velocity
+        const dv = (state1.dv + 2 * state2.dv + 2 * state3.dv + state4.dv) / 6; // Average Acceleration
+    
+        this.position += dx * deltaTime;
+        this.velocity += dv * deltaTime;
+        this.position = Math.max(this.position, 0);
+    
+        if (this.position > 0) this.time += deltaTime;
+        else this.velocity = 0;
+    }
+
+    CalculateState(state, environment, useDrag, useBuoyancy) {
+        // Simulate what acceleration would be at a given state
+        const { position, velocity } = state;
+    
+        // Save original state
+        const originalPosition = this.position;
+        const originalVelocity = this.velocity;
+    
+        // Temporarily set object to simulate forces at this state
+        this.position = position;
+        this.velocity = velocity;
+        this.CalculateAcceleration(environment, useDrag, useBuoyancy);
+        const a = this.acceleration;
+    
+        // Restore original state
+        this.position = originalPosition;
+        this.velocity = originalVelocity;
+    
+        return {
+            dx: velocity,
+            dv: a
+        };
     }
 
     DebugState() {
